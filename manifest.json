@@ -1,0 +1,22 @@
+{
+  "name": "NelysNails",
+  "short_name": "NelysNails",
+  "description": "Uñas y belleza - Tu espacio de cuidado personal",
+  "start_url": "/nelysnails/",
+  "scope": "/nelysnails/",
+  "display": "standalone",
+  "background_color": "#ec4899",
+  "theme_color": "#ec4899",
+  "icons": [
+    {
+      "src": "/nelysnails/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/nelysnails/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
