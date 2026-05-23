@@ -1,6 +1,6 @@
 // sw.js - Service Worker para NelysNails
 
-const CACHE_NAME = 'nelysnails-v29';
+const CACHE_NAME = 'nelysnails-v25';
 const urlsToCache = [
   '/nelysnails/',
   '/nelysnails/index.html',
