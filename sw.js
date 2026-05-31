@@ -1,6 +1,6 @@
 // sw.js - Service Worker para NelysNails
 
-const CACHE_NAME = 'nelysnails-v29';
+const CACHE_NAME = 'nelysnails-v47';
 const urlsToCache = [
   '/nelysnails/',
   '/nelysnails/index.html',
@@ -17,7 +17,14 @@ const urlsToCache = [
   '/nelysnails/icons/icon-152x152.png',
   '/nelysnails/icons/icon-192x192.png',
   '/nelysnails/icons/icon-384x384.png',
-  '/nelysnails/icons/icon-512x512.png'
+  '/nelysnails/icons/icon-512x512.png',
+  '/nelysnails/vendor/react.production.min.js',
+  '/nelysnails/vendor/react-dom.production.min.js',
+  '/nelysnails/vendor/babel.min.js',
+  '/nelysnails/vendor/bcrypt.min.js',
+  '/nelysnails/vendor/tailwind-browser.js',
+  '/nelysnails/vendor/lucide/lucide.css',
+  '/nelysnails/vendor/lucide/lucide.woff2'
 ];
 
 // ============================================
