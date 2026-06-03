@@ -1,6 +1,6 @@
 // sw.js - Service Worker para NelysNails
 
-const CACHE_NAME = 'nelysnails-v47';
+const CACHE_NAME = 'nelysnails-v49';
 const urlsToCache = [
   '/nelysnails/',
   '/nelysnails/index.html',
@@ -24,7 +24,9 @@ const urlsToCache = [
   '/nelysnails/vendor/bcrypt.min.js',
   '/nelysnails/vendor/tailwind-browser.js',
   '/nelysnails/vendor/lucide/lucide.css',
-  '/nelysnails/vendor/lucide/lucide.woff2'
+  '/nelysnails/vendor/lucide/lucide.woff2',
+  '/nelysnails/utils/push-config.js',
+  '/nelysnails/utils/push-notifications.js'
 ];
 
 // ============================================
@@ -144,6 +146,51 @@ self.addEventListener('message', event => {
       });
     });
   }
+});
+
+// ============================================
+// WEB PUSH OPCIONAL
+// ============================================
+self.addEventListener('push', event => {
+  let payload = {};
+
+  try {
+    payload = event.data ? event.data.json() : {};
+  } catch (error) {
+    payload = {
+      title: 'RservasRoma',
+      body: event.data ? event.data.text() : 'Tienes una nueva notificación'
+    };
+  }
+
+  const title = payload.title || 'RservasRoma';
+  const options = {
+    body: payload.body || 'Tienes una nueva notificación',
+    icon: '/nelysnails/icons/icon-192x192.png',
+    badge: '/nelysnails/icons/icon-96x96.png',
+    tag: payload.tag || 'rservasroma',
+    data: {
+      url: payload.url || '/nelysnails/admin.html',
+      ...(payload.data || {})
+    }
+  };
+
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+self.addEventListener('notificationclick', event => {
+  event.notification.close();
+
+  const targetUrl = event.notification?.data?.url || '/nelysnails/admin.html';
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clientList => {
+      for (const client of clientList) {
+        if (client.url.includes(targetUrl) && 'focus' in client) return client.focus();
+      }
+      if (clients.openWindow) return clients.openWindow(targetUrl);
+      return null;
+    })
+  );
 });
 
 console.log('✅ Service Worker configurado para NelysNails');
